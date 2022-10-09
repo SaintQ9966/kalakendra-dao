@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<div class="w3-row-padding">
+    <div class="w3-half">
+        <img class="w3-margin w3-left" src="../../{{ project.logo_relative_path }}" style="height:120px;width:120px;" alt="{{ project.project_name }}">
+        <div class="w3-margin w3-left">
+            {% if project.ticker %}
+                <h2>{{ project.project_name }}
+                    ({{ project.ticker }})</h2>
+            {% else %}
+                <h2>{{ project.project_name }}</h2>
+            {% endif %}
+            <div class="w3-container">
+                {% if project.cat_defi == 'true' %}
+                    <span class="w3-tag w3-round w3-grey">DeFi</span>
+                {% endif %}
+                {% if project.cat_nft == 'true' %}
+                    <span class="w3-tag w3-round w3-grey">NFT</span>
+                {% endif %}
+                {% if project.cat_gamefi == 'true' %}
+                    <span class="w3-tag w3-round w3-grey">GameFi</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="w3-container w3-half">
+        <div class="w3-container w3-right">
+            <a class="w3-button w3-round w3-grey" href="{{ project.website }}" target="_blank" style="text-decoration:none;">Website</a>
+        </div>
+        <br>
+        <br>
+        <div class="w3-container w3-right">
+            <a href="{{ project.twitter_handle }}" target="_blank" style="text-decoration:none;">
+                <i class="fa fa-home"></i>
+            </a>
+            <a href="{{ project.discord_username }}" target="_blank" style="text-decoration:none;">
+                <i class="fa fa-search"></i>
+            </a>
+            <a href="{{ project.discord_username }}" target="_blank" style="text-decoration:none;">
+                <i class="fa fa-search"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<div class="w3-container w3-margin w3-padding-16">
+    <p>{{ project.description }}</p>
+</div>
+{% endblock body %}

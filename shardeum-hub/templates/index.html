@@ -1,0 +1,157 @@
+{% extends 'layout.html' %}
+{% block body %}
+    <div class="jumbotron text-center w3-light-grey">
+        <h1>
+            <b>SHARDEUM HUB</b>
+        </h1>
+        <hr>
+        Shardeum Hub provides the curated list of potential projects adding value to Shardeum ecosystem
+    </hr>
+</div>
+
+
+<div class="w3-container">
+<div class="w3-content w3-display-container">
+  <img class="mySlides" src="media/sample-banner-01.png" style="width:100%">
+  <img class="mySlides" src="media/sample-banner-02.png" style="width:100%">
+  <img class="mySlides" src="media/sample-banner-02.png" style="width:100%">
+  <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
+    <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+    <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+  </div>
+</div>
+</div>
+
+<br>
+<div class="w3-container">
+  <div class="w3-right w3-margin-right">
+      <input type="text" placeholder="Search.." name="search" id="searchbox">
+      <button type="button" onclick="setURL('URLHere')""><i class="fa fa-search"></i></button>
+  </div>
+</div>
+
+<br>
+<div class="w3-container w3-cell-row">
+
+<div class="w3-container w3-cell w3-mobile w3-bar-block w3-border w3-round w3-small w3-light-grey w3-center" style="width:20%">
+  <a href="{% url 'project:results' 1 %}" class="w3-bar-item w3-button w3-border-bottom" target="iframe-results">Trending</a>
+  <a href="{% url 'project:results' 2 %}" class="w3-bar-item w3-button w3-border-bottom" target="iframe-results">DeFi</a>
+  <a href="{% url 'project:results' 4 %}" class="w3-bar-item w3-button w3-border-bottom" target="iframe-results">GameFi</a>
+  <a href="{% url 'project:results' 3 %}" class="w3-bar-item w3-button w3-border-bottom" target="iframe-results">NFT</a>
+  <a href="{% url 'project:results' 6 %}" class="w3-bar-item w3-button w3-border-bottom" target="iframe-results">Wallet</a>
+  <a href="{% url 'project:results' 5 %}" class="w3-bar-item w3-button w3-border-bottom" target="iframe-results">DEX</a>
+</div>
+
+<div class="w3-container w3-cell w3-mobile" style="overflow:hidden;">
+    <iframe src="{% url 'project:results' 1 %}" name="iframe-results" id="iresults" title="Search Results" frameborder="0" width="110%" height="400px"></iframe>
+</div>
+</div>
+
+
+<br>
+<div class="w3-container w3-border w3-round w3-large w3-light-grey w3-padding-24 w3-margin">
+  <div class="w3-left-align"><p><b>DISCLAIMER:</b> The information presented herein has been provided by third parties and is made available solely for general information purposes. Shardeum Hub does not warrant the accuracy of this information. The information should not be construed as professional or financial advice of any kind.</p></div>
+</div>
+
+
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function currentDiv(n) {
+  showDivs(slideIndex = n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" w3-white", "");
+  }
+  x[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " w3-white";
+}
+
+function setURL(url){
+    var keyword = document.getElementById('searchbox').value;
+    if (keyword) {
+        document.getElementById('iresults').src = "/projects/project/searchresults/" + keyword + "/";
+    }
+}
+</script>
+
+<style>
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);
+}
+
+.overlay-content {
+  position: relative;
+  top: 46%;
+  width: 80%;
+  text-align: center;
+  margin-top: 30px;
+  margin: auto;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  cursor: pointer;
+  color: white;
+}
+
+.overlay .closebtn:hover {
+  color: #ccc;
+}
+
+.overlay input[type=text] {
+  padding: 15px;
+  font-size: 17px;
+  border: none;
+  float: left;
+  width: 80%;
+  background: white;
+}
+
+.overlay input[type=text]:hover {
+  background: #f1f1f1;
+}
+
+.overlay button {
+  float: left;
+  width: 20%;
+  padding: 15px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.overlay button:hover {
+  background: #bbb;
+}
+</style>
+
+{% endblock %}
